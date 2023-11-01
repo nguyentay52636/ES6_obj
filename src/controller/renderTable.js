@@ -49,4 +49,3 @@
 //     default:
 //       $a('.table thead').innerHTML = orginalTH;
 //   }
-// }

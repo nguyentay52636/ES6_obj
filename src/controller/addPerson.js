@@ -4,13 +4,22 @@ import Employee from '../models/Employee.js';
 import Customer from '../models/Customer.js';
 import { handleRender } from './handleRender.js';
 import { setLocalStorage } from './localStorage.js';
-
+// import {
+//   validatePerson,
+//   validateStudent,
+//   ValidateEmployee,
+//   validateCustomer,
+// } from './Validator.js';
 export function getPerson() {
+  // if (!validatePerson) {
+  //   return;
+  // }
   const selecValue = $a('#typePersonModal');
   const id = $a('#ID').value;
   const name = $a('#name').value;
   const email = $a('#email').value;
   const address = $a('#address').value;
+
   switch (selecValue.value) {
     case 'Student':
       const diemToan = $a('#diemToan').value;
@@ -64,3 +73,20 @@ export default function addPerson(listPerson) {
   handleRender(listPerson.persons);
   setLocalStorage(listPerson.persons);
 }
+
+// function resetInfo() {
+//   $a('#name').value = '';
+//   $a('ID').value = ' ';
+//   $a('#email').value = '';
+//   $a('#address').value = '';
+//   $a('#diemToan').value = '';
+//   $a('#diemLy').value = '';
+//   $a('#diemHoa').value = '';
+//   //
+//   $a('#workingDays').value = '';
+//   $a('#salaryDay').value = '';
+//   //
+//   $a('#companyName').value = '';
+//   $a('#valuation').value = '';
+//   $a('#review').value = '';
+// }

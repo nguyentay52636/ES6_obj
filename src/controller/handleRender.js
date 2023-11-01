@@ -1,4 +1,4 @@
-import ListPerson from '../models/ListPerson.js';
+// import ListPerson from '../models/ListPerson.js';
 import { $a, $all } from './shortElement.js';
 
 export function handleRender(arr) {
@@ -12,7 +12,7 @@ export function handleRender(arr) {
     <td>${item.name}</td>
     <td>${item.email}</td>
     <td>${item.address}</td>
-    <td><button class="btn btn-info" id="editBtn" >Edit</button>
+    <td>
     <button class="btn btn-danger" id="deleteBtn" keyPerson="${
       item.ma
     }" >Delete</button>

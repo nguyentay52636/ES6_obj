@@ -110,11 +110,11 @@
 					<div class="card-header myCardHeader">
 						<div class="row">
 							<div class="col-md-6">
-								<h3 class="text-left text-primary font-weight-bold">Mana</h3>
+								<h3 class="text-left text-primary font-weight-bold"></h3>
 							</div>
 							<div class="col-md-6 text-right">
 								<button class="btn btn-primary" id="btnThem" data-toggle="modal"
-									data-target="#myModal">Thêm nhân viên</button>
+									data-target="#myModal">Add</button>
 							</div>
 						</div>
 					</div>
@@ -123,13 +123,20 @@
 					<div class="card-body">
 						<div class="row mb-3">
 							<div class="col">
+								
 								<div class="input-group">
+
 								<select name="" id="typeFromSelect" class="form-control" >
 									<option  >Select</option>
 									<option value="sinhvien" >Student</option>
 									<option value="nhanvien">Employee</option>
 									<option value="khachhang" >Customer</option>
 								</select>
+									</div>
+									<span class="pForm_noti" id="notiType"></span>
+									<br>
+									<div class="input-group">
+										<input type="text" placeholder="Search" class="form-control" width="50%">
 									</div>
 								</div>
 							</div>
@@ -268,8 +275,9 @@
 
 				<!-- Modal footer -->
 				<div class="modal-footer" id="modal-footer">
+
+					<button id="btnCapNhat" type="button" class="btn btn-success">Cập nhật</button>
 					<button id="btnAddPerson" type="button" class="btn btn-success" >Thêm người dùng</button>
-					<button id="btnCapNhat" type="button" class="btn btn-success" onclick="UpdateNV()">Cập nhật</button>
 					<button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
 				</div>
 
@@ -304,6 +312,7 @@
 			});
 		});
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 <!-- <script src="./src/controller/renderTable.js"></script> -->
