@@ -4,59 +4,79 @@ import addPerson from './addPerson.js';
 import ListPerson from '../models/ListPerson.js';
 import deletePerson from './deletePerson.js';
 import { handleRender } from './handleRender.js';
-// import { renderTable } from './renderTable.js';
 import { getLocalStorage, setLocalStorage } from './localStorage.js';
 import { getTypePerson } from './getTypePerson.js';
-// import {
-//   validatePerson,
-//   validateStudent,
-//   ValidateEmployee,
-//   validateCustomer,
-// } from './Validator.js';
+import {
+  validatePerson,
+  validateStudent,
+  ValidateEmployee,
+  validateCustomer,
+} from './Validator.js';
 const listPerson = new ListPerson();
-
-// $a('#typePersonModal').addEventListener('change', handleModal);
+$a('#typePersonModal').addEventListener('change', handleModal);
 // $a('#btnAddPerson').addEventListener('click', () => {
-//   if (validatePerson()) {
-//     const typePerson = $a('#typePersonModal').value;
-//     switch (typePerson) {
-//       case 'Student':
-//         if (validateStudent()) {
-//           addPerson(listPerson);
-//           $a('btnDong').click();
-//           Swal.fire({
-//             icon: 'success',
-//             title: ' Add Susscess!',
-//           });
-//         }
-//         break;
-//       case 'Employee':
-//         if (ValidateEmployee()) {
-//           addPerson(listPerson);
-//           $a('btnDong').click();
-//           Swal.fire({
-//             icon: 'success',
-//             title: ' Add Susscess!',
-//           });
-//         }
-//         break;
-
-//       case 'Customer':
-//         if (validateCustomer()) {
-//           addPerson(listPerson);
-//           $a('btnDong').click();
-//           Swal.fire({
-//             icon: 'success',
-//             title: ' Add Susscess!',
-//           });
-//         }
-//         break;
-//     }
-//   }
+//   addPerson(listPerson);
+//   $a('#btnDong').click();
+//   Swal.fire({
+//     icon: 'success',
+//     title: ' Add Susscess!',
+//   });
+//   resetForm();
 // });
+
 $a('#btnAddPerson').addEventListener('click', () => {
-  addPerson(listPerson);
+  const typePerson = $a('#typePersonModal').value;
+  if (typePerson === 'default') {
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid Input',
+      text: 'Vui lòng chọn loại người dùng trước khi thêm!',
+    });
+    return;
+  }
+
+  if (validatePerson()) {
+    switch (typePerson) {
+      case 'Student':
+        if (validateStudent()) {
+          addPerson(listPerson);
+          $a('#btnDong').click();
+          Swal.fire({
+            icon: 'success',
+            title: 'Add Success!',
+          });
+          resetForm();
+        }
+        break;
+      case 'Employee':
+        if (ValidateEmployee()) {
+          addPerson(listPerson);
+          $a('#btnDong').click();
+          Swal.fire({
+            icon: 'success',
+            title: 'Add Success!',
+          });
+          resetForm();
+        }
+        break;
+      case 'Customer':
+        if (validateCustomer()) {
+          addPerson(listPerson);
+          $a('#btnDong').click();
+          Swal.fire({
+            icon: 'success',
+            title: 'Add Success!',
+          });
+          resetForm();
+        }
+        break;
+      default:
+        // Xử lý trường hợp mặc định nếu cần thiết
+        break;
+    }
+  }
 });
+
 if (getLocalStorage() === null) {
   setLocalStorage(listPerson.persons);
 }
@@ -72,6 +92,7 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
       const personID = event.target.getAttribute('keyPerson');
       deletePerson(listPerson, personID);
       handleRender(listPerson.persons);
+      setLocalStorage(listPerson.persons);
       Swal.fire({
         icon: 'success',
         title: 'Delete Susscess!',
@@ -177,7 +198,6 @@ $a('#btnCapNhat').addEventListener('click', (event) => {
       break;
   }
 
-  // Tiến hành cập nhật thông tin người trong listPerson
   const index = listPerson.persons.findIndex((person) => {
     return person.ma === id;
   });
@@ -185,6 +205,7 @@ $a('#btnCapNhat').addEventListener('click', (event) => {
     listPerson.persons[index] = updatedPerson;
     handleRender(listPerson.persons);
     $a('#btnDong').click();
+    resetForm();
     Swal.fire({
       icon: 'success',
       title: 'Update Success!',
@@ -204,4 +225,12 @@ function autoSelectTypePerson(type) {
       typePersonModal.options[i].selected = true;
     }
   }
+}
+
+function resetForm() {
+  const resetInput = $all('#resetForm input');
+  const arrInput = [...resetInput];
+  arrInput.map((input) => {
+    input.value = '';
+  });
 }

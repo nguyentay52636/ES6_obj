@@ -73,20 +73,3 @@ export default function addPerson(listPerson) {
   handleRender(listPerson.persons);
   setLocalStorage(listPerson.persons);
 }
-
-// function resetInfo() {
-//   $a('#name').value = '';
-//   $a('ID').value = ' ';
-//   $a('#email').value = '';
-//   $a('#address').value = '';
-//   $a('#diemToan').value = '';
-//   $a('#diemLy').value = '';
-//   $a('#diemHoa').value = '';
-//   //
-//   $a('#workingDays').value = '';
-//   $a('#salaryDay').value = '';
-//   //
-//   $a('#companyName').value = '';
-//   $a('#valuation').value = '';
-//   $a('#review').value = '';
-// }
