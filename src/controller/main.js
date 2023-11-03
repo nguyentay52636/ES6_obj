@@ -1,6 +1,6 @@
 import { $a, $all } from './shortElement.js';
 import { handleModal } from './handleChange.js';
-import addPerson from './addPerson.js';
+import addPerson, { getPerson } from './addPerson.js';
 import ListPerson from '../models/ListPerson.js';
 import deletePerson from './deletePerson.js';
 import { handleRender } from './handleRender.js';
@@ -16,12 +16,7 @@ const listPerson = new ListPerson();
 $a('#typePersonModal').addEventListener('change', handleModal);
 $a('#btnAddPerson').addEventListener('click', () => {
   addPerson(listPerson);
-  $a('#btnDong').click();
-  Swal.fire({
-    icon: 'success',
-    title: ' Add Susscess!',
-  });
-  resetForm();
+  //
 });
 
 if (getLocalStorage() === null) {
@@ -91,79 +86,16 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
 //cap nhap
 // $a('#btnCapNhat').style.display = 'block';
 $a('#btnCapNhat').addEventListener('click', (event) => {
-  const id = $a('#ID').value;
-  const name = $a('#name').value;
-  const email = $a('#email').value;
-  const address = $a('#address').value;
-  const type = $a('#typePersonModal').value;
-
-  let updatedPerson;
-
-  switch (type) {
-    case 'Student':
-      const toan = $a('#diemToan').value;
-      const ly = $a('#diemLy').value;
-      const hoa = $a('#diemHoa').value;
-      updatedPerson = {
-        ma: id,
-        name: name,
-        email: email,
-        address: address,
-        type: type,
-        toan: toan,
-        ly: ly,
-        hoa: hoa,
-      };
-      break;
-    case 'Employee':
-      const workingDays = $a('#workingDays').value;
-      const salaryDay = $a('#salaryDay').value;
-      updatedPerson = {
-        ma: id,
-        name: name,
-        email: email,
-        address: address,
-        type: type,
-        workingDays: workingDays,
-        salaryDay: salaryDay,
-      };
-      break;
-    case 'Customer':
-      const companyName = $a('#companyName').value;
-      const valuation = $a('#valuation').value;
-      const review = $a('#review').value;
-      updatedPerson = {
-        ma: id,
-        name: name,
-        email: email,
-        address: address,
-        type: type,
-        companyName: companyName,
-        valuation: valuation,
-        review: review,
-      };
-      break;
-  }
-
-  const index = listPerson.persons.findIndex((person) => {
-    return person.ma === id;
+  const person = getPerson();
+  if (person == false) return;
+  listPerson.editPerson(person);
+  handleRender(listPerson.persons);
+  setLocalStorage(listPerson.persons);
+  $a('#btnDong').click();
+  Swal.fire({
+    icon: 'success',
+    title: ' Update Susscess!',
   });
-  if (index !== -1) {
-    listPerson.persons[index] = updatedPerson;
-    handleRender(listPerson.persons);
-    $a('#btnDong').click();
-    resetForm();
-    Swal.fire({
-      icon: 'success',
-      title: 'Update Success!',
-    });
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Update faild!',
-      text: 'Person not found!',
-    });
-  }
 });
 
 function autoSelectTypePerson(type) {
@@ -176,12 +108,15 @@ function autoSelectTypePerson(type) {
 
 function resetForm() {
   const resetInput = $all('#resetForm input');
+
   const arrInput = [...resetInput];
   arrInput.map((input) => {
     input.value = '';
   });
 }
-// $a('#btnThem').addEventListener('click', () => {
-//   $a('#btnCapNhat').style.display = 'none';
-// });
-// f
+
+$a('#btnDong').addEventListener('click', () => {
+  resetForm();
+});
+// $a('#myModal').addEventListener('click', () => {
+//   resetForm();

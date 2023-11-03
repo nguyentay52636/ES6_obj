@@ -1,6 +1,5 @@
 // import ListPerson from '../models/ListPerson.js';
 import { $a, $all } from './shortElement.js';
-
 export function handleRender(arr) {
   const content = arr.reduce((prev, item, index) => {
     return (
