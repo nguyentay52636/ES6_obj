@@ -6,75 +6,22 @@ import deletePerson from './deletePerson.js';
 import { handleRender } from './handleRender.js';
 import { getLocalStorage, setLocalStorage } from './localStorage.js';
 import { getTypePerson } from './getTypePerson.js';
-import {
-  validatePerson,
-  validateStudent,
-  ValidateEmployee,
-  validateCustomer,
-} from './Validator.js';
+// import {
+//   validatePerson,
+//   validateStudent,
+//   ValidateEmployee,
+//   validateCustomer,
+// } from './Validator.js';
 const listPerson = new ListPerson();
 $a('#typePersonModal').addEventListener('change', handleModal);
-// $a('#btnAddPerson').addEventListener('click', () => {
-//   addPerson(listPerson);
-//   $a('#btnDong').click();
-//   Swal.fire({
-//     icon: 'success',
-//     title: ' Add Susscess!',
-//   });
-//   resetForm();
-// });
-
 $a('#btnAddPerson').addEventListener('click', () => {
-  const typePerson = $a('#typePersonModal').value;
-  if (typePerson === 'default') {
-    Swal.fire({
-      icon: 'error',
-      title: 'Invalid Input',
-      text: 'Vui lòng chọn loại người dùng trước khi thêm!',
-    });
-    return;
-  }
-
-  if (validatePerson()) {
-    switch (typePerson) {
-      case 'Student':
-        if (validateStudent()) {
-          addPerson(listPerson);
-          $a('#btnDong').click();
-          Swal.fire({
-            icon: 'success',
-            title: 'Add Success!',
-          });
-          resetForm();
-        }
-        break;
-      case 'Employee':
-        if (ValidateEmployee()) {
-          addPerson(listPerson);
-          $a('#btnDong').click();
-          Swal.fire({
-            icon: 'success',
-            title: 'Add Success!',
-          });
-          resetForm();
-        }
-        break;
-      case 'Customer':
-        if (validateCustomer()) {
-          addPerson(listPerson);
-          $a('#btnDong').click();
-          Swal.fire({
-            icon: 'success',
-            title: 'Add Success!',
-          });
-          resetForm();
-        }
-        break;
-      default:
-        // Xử lý trường hợp mặc định nếu cần thiết
-        break;
-    }
-  }
+  addPerson(listPerson);
+  $a('#btnDong').click();
+  Swal.fire({
+    icon: 'success',
+    title: ' Add Susscess!',
+  });
+  resetForm();
 });
 
 if (getLocalStorage() === null) {
@@ -104,7 +51,7 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
         return person.ma === id;
       });
 
-      $a('#btnAddPerson').style.display = ' none';
+      // $a('#btnAddPerson').style.display = ' none';
 
       const typePerson = getTypePerson(person);
       let typePersonModal = $a('#typePersonModal');
@@ -142,7 +89,7 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
   }
 });
 //cap nhap
-
+// $a('#btnCapNhat').style.display = 'block';
 $a('#btnCapNhat').addEventListener('click', (event) => {
   const id = $a('#ID').value;
   const name = $a('#name').value;
@@ -234,3 +181,7 @@ function resetForm() {
     input.value = '';
   });
 }
+// $a('#btnThem').addEventListener('click', () => {
+//   $a('#btnCapNhat').style.display = 'none';
+// });
+// f

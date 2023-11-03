@@ -4,12 +4,12 @@ import Employee from '../models/Employee.js';
 import Customer from '../models/Customer.js';
 import { handleRender } from './handleRender.js';
 import { setLocalStorage } from './localStorage.js';
-// import {
-//   validatePerson,
-//   validateStudent,
-//   ValidateEmployee,
-//   validateCustomer,
-// } from './Validator.js';
+import {
+  validatePerson,
+  validateStudent,
+  ValidateEmployee,
+  validateCustomer,
+} from './Validator.js';
 export function getPerson() {
   // if (!validatePerson) {
   //   return;

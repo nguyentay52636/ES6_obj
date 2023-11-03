@@ -43,7 +43,7 @@ export function validatePerson() {
   if (!email) {
     flag = false;
     $a('#tbEmail').innerHTML = Valid_String;
-  } else if (!email.test(regexEmail)) {
+  } else if (!email.match(regexEmail)) {
     flag = false;
     $a('#tbEmail').innerHTML = 'Email không đúng định dạng !';
   } else {

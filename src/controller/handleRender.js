@@ -3,7 +3,6 @@ import { $a, $all } from './shortElement.js';
 
 export function handleRender(arr) {
   const content = arr.reduce((prev, item, index) => {
-    console.log(item);
     return (
       prev +
       ` <tr>
