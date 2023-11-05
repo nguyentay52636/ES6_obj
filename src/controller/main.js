@@ -6,12 +6,8 @@ import deletePerson from './deletePerson.js';
 import { handleRender } from './handleRender.js';
 import { getLocalStorage, setLocalStorage } from './localStorage.js';
 import { getTypePerson } from './getTypePerson.js';
-// import {
-//   validatePerson,
-//   validateStudent,
-//   ValidateEmployee,
-//   validateCustomer,
-// } from './Validator.js';
+import { SortPerson } from './sortPersonOfName.js';
+
 const listPerson = new ListPerson();
 $a('#typePersonModal').addEventListener('change', handleModal);
 $a('#btnAddPerson').addEventListener('click', () => {
@@ -98,6 +94,11 @@ $a('#btnCapNhat').addEventListener('click', (event) => {
   });
 });
 
+$a('#SapXep').addEventListener('change', () => {
+  SortPerson(listPerson);
+  // handleRender(listPerson.persons);
+  setLocalStorage(listPerson.persons);
+});
 function autoSelectTypePerson(type) {
   for (let i = 0; i < typePersonModal.options.length; i++) {
     if (typePersonModal.options[i].value === type) {
@@ -118,5 +119,3 @@ function resetForm() {
 $a('#btnDong').addEventListener('click', () => {
   resetForm();
 });
-// $a('#myModal').addEventListener('click', () => {
-//   resetForm();

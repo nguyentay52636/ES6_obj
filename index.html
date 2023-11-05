@@ -116,7 +116,7 @@
 							</div>
 							<div class="col-md-6 text-right">
 								<button class="btn btn-primary" id="btnThem" data-toggle="modal"
-									data-target="#myModal" onclick="resetForm()">Add</button>
+									data-target="#myModal">Add</button>
 							</div>
 						</div>
 					</div>
@@ -148,11 +148,20 @@
 								<tr>
 									<th class="nowrap">
 										<span class="mr-1">STT</span>
-										<i class="fa fa-arrow-up" id="SapXepTang"></i>
-										<i class="fa fa-arrow-down" id="SapXepGiam"></i>
+										<!-- <i class="fa fa-arrow-up" id="SapXepTang"></i>
+										<i class="fa fa-arrow-down" id="SapXepGiam"></i> -->
 									</th>
                   					<th>ID</th>	
-									<th>Họ và tên</th>
+									<th>
+									Họ và tên 
+										<div id="DoanThang">
+				
+											<select name="type" id="SapXep"  >
+											  <option value=""> Chọn sắp xếp </option>
+											  <option value="Tang">Sắp xếp tăng </option>
+											  <option value="Giam">sắp xếp giảm</option>
+											</select>
+										  </div> </th>
 									<th>Email</th>
 									<th>Dia chi</th>
 																
