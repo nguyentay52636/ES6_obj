@@ -25,6 +25,7 @@ handleRender(listPerson.persons);
 $a('#tableDanhSach').addEventListener('click', (event) => {
   const idEle = event.target.id;
   // console.log(event.target);
+  let isButtonCreated = false;
   switch (idEle) {
     case 'deleteBtn':
       const personID = event.target.getAttribute('keyPerson');
@@ -37,6 +38,8 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
         footer: '<a href="">Why do I have this issue?</a>',
       });
     case 'btnView':
+      $a('#btnAddPerson').style.display = 'none';
+      $a('#btnCapNhat').style.display = 'block';
       const id = event.target.getAttribute('keyPerson');
       const person = listPerson.persons.find((person) => {
         return person.ma === id;
@@ -46,6 +49,7 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
 
       const typePerson = getTypePerson(person);
       let typePersonModal = $a('#typePersonModal');
+
       const { ma, name, email, address } = person;
       $a('#ID').value = ma;
       $a('#name').value = name;
@@ -59,7 +63,25 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
           $a('#diemToan').value = toan;
           $a('#diemLy').value = ly;
           $a('#diemHoa').value = hoa;
-
+          // $a('btnTinhLuong').style.display = 'none';
+          if (!isButtonCreated) {
+            const button = document.createElement('button');
+            button.classList.add('btn');
+            button.classList.add('btn-success');
+            button.type = 'button';
+            button.id = 'btnDTB';
+            button.textContent = 'Điểm Trung Bình';
+            const modelFooter = $a('#modal-footer');
+            if (modelFooter) {
+              modelFooter.appendChild(button);
+              isButtonCreated = true;
+            } else {
+              console.log('error');
+            }
+            // $a('#btnView').removeEventListener('click',handleClick)
+          }
+          // $a('btnTinhLuong').style.display = 'none';
+          $a('#btnDTB').style.display = 'block';
           break;
         case 'Employee':
           autoSelectTypePerson('Employee');
@@ -67,6 +89,24 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
           const { workingDays, salaryDay } = person;
           $a('#workingDays').value = workingDays;
           $a('#salaryDay').value = salaryDay;
+          if (!isButtonCreated) {
+            const button = document.createElement('button');
+            button.classList.add('btn');
+            button.classList.add('btn-info');
+            button.type = 'button';
+            button.id = 'btnTinhLuong';
+            button.textContent = 'total salary';
+            const modelFooter = $a('#modal-footer');
+            if (modelFooter) {
+              modelFooter.appendChild(button);
+              isButtonCreated = true;
+            } else {
+              console.log('error');
+            }
+            // $a('#btnView').removeEventListener('click',handleClick)
+          }
+          $a('btnTinhLuong').style.display = 'block';
+          $a('#btnDTB').style.display = 'none';
           break;
         case 'Customer':
           autoSelectTypePerson('Customer');
@@ -75,10 +115,14 @@ $a('#tableDanhSach').addEventListener('click', (event) => {
           $a('#companyName').value = companyName;
           $a('#valuation').value = valuation;
           $a('#review').value = review;
+
+          $a('#btnDTB').style.display = 'none';
+          $a('btnTinhLuong').style.display = 'none';
           break;
       }
   }
 });
+
 //cap nhap
 // $a('#btnCapNhat').style.display = 'block';
 $a('#btnCapNhat').addEventListener('click', (event) => {
@@ -97,7 +141,6 @@ $a('#btnCapNhat').addEventListener('click', (event) => {
 $a('#SapXep').addEventListener('change', () => {
   SortPerson(listPerson);
   // handleRender(listPerson.persons);
-  setLocalStorage(listPerson.persons);
 });
 function autoSelectTypePerson(type) {
   for (let i = 0; i < typePersonModal.options.length; i++) {
@@ -116,6 +159,25 @@ function resetForm() {
   });
 }
 
-$a('#btnDong').addEventListener('click', () => {
+$a('#btnThem').addEventListener('click', () => {
+  $a('#btnAddPerson').style.display = 'block';
+  $a('#btnCapNhat').style.display = 'none';
   resetForm();
+});
+$a('#btnDong').addEventListener('click', () => {
+  const btnLuong = $a('#btnTinhLuong');
+  if (btnLuong) {
+    btnLuong.remove();
+  } else {
+    $a('#btnDTB').remove();
+  }
+});
+
+$a('.modal').addEventListener('click', () => {
+  const btnLuong = $a('#btnTinhLuong');
+  if (btnLuong) {
+    btnLuong.remove();
+  } else {
+    $a('#btnDTB').remove();
+  }
 });
